@@ -20,12 +20,16 @@ function App() {
 
   return (
     <>
-      {data.map((x) => (
-        <div key={x.id}>
-          <h2>{x.title}</h2>
-          <p>{x.description}</p>
+      <div className='min-h-screen py-8 px-4 sm:px-7 lg:px-8'>
+        <div className='max-w-100 mx-auto'>
+          {data.map((x) => (
+            <div key={x.id} className="bg-blue-500 p-7 h-100 border text-center m-2">
+              <h2>{x.title}</h2>
+              <p>{x.description}</p>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </>
   )
 }
