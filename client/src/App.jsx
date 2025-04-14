@@ -10,6 +10,7 @@ function App() {
     title: '',
     description: ''
   })
+  const [darkTheme, setDarkTheme] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,11 +31,6 @@ function App() {
       title: x.title,
       description: x.description
     })
-  }
-
-  const handleCreate = () => {
-    setCreating(true)
-    setEditForm({ title: '', description: '' })
   }
 
   const handlePOST = async () => {
@@ -69,10 +65,19 @@ function App() {
     }
   }
 
+  const toggleDarkTheme = () => {
+    setDarkTheme(!darkTheme)
+  }
+
   return (
     <>
-      <div className='min-h-screen py-8 px-4 sm:px-7 lg:px-8'>
-
+      <div className={`min-h-screen py-8 px-4 sm:px-7 lg:px-8 ${darkTheme ? 'bg-gray-800 text-white' : 'bg-gray-100 text-black'}`}>
+        <button
+          onClick={toggleDarkTheme}
+          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+        >
+          {darkTheme ? '☀️' : '🌙'}
+        </button>
         <div className='max-w-100 mx-auto'>
           <div className='flex justify-center mb-5'>
             {creating ? (
@@ -169,7 +174,7 @@ function App() {
           ))}
 
         </div>
-      </div>
+      </div >
     </>
   )
 }
