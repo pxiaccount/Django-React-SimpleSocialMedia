@@ -110,6 +110,7 @@ function App() {
                   type="file"
                   onChange={(e) => setEditForm({ ...editForm, photo: e.target.files[0] })}
                   className='p-2 bg-blue-500 rounded-lg'
+                  multiple
                 />
                 <div className="flex justify-center space-x-2">
                   <button
