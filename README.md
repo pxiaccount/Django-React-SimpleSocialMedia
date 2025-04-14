@@ -37,11 +37,12 @@ Clone the repository:
     from django.core.management.utils import get_random_secret_key
     print(get_random_secret_key())
     ```
-5. Apply the migrations:
+5. Create <code>media/posts/</code>
+6. Apply the migrations:
     ```bash
     python manage.py migrate
     ```
-6. Run the development server:
+7. Run the development server:
     ```bash
     python manage.py runserver
     ```
