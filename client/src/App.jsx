@@ -8,7 +8,8 @@ function App() {
   const [creating, setCreating] = useState(null)
   const [editForm, setEditForm] = useState({
     title: '',
-    description: ''
+    description: '',
+    photo: ''
   })
   const [darkTheme, setDarkTheme] = useState(true)
 
@@ -29,18 +30,28 @@ function App() {
     setEditing(x.id)
     setEditForm({
       title: x.title,
-      description: x.description
+      description: x.description,
+      photo: x.photo,
     })
   }
 
   const handlePOST = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/api/', editForm)
-      setData([...data, response.data])
-      setCreating(false)
-      setEditForm({ title: '', description: '' })
+      const formData = new FormData();
+      formData.append('title', editForm.title);
+      formData.append('description', editForm.description);
+      formData.append('photo', editForm.photo);
+
+      const response = await axios.post('http://localhost:8000/api/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      setData([...data, response.data]);
+      setCreating(false);
+      setEditForm({ title: '', description: '', photo: '' });
     } catch (error) {
-      console.error('Error creating post:', error)
+      console.error('Error creating post:', error);
     }
   }
 
@@ -95,6 +106,11 @@ function App() {
                   className="w-full p-2 border rounded"
                   placeholder="Enter description"
                 />
+                <input
+                  type="file"
+                  onChange={(e) => setEditForm({ ...editForm, photo: e.target.files[0] })}
+                  className='p-2 bg-blue-500 rounded-lg'
+                />
                 <div className="flex justify-center space-x-2">
                   <button
                     onClick={handlePOST}
@@ -123,9 +139,9 @@ function App() {
             )}
           </div>
           {data.map((x) => (
-            <div key={x.id} className="bg-blue-500 p-7 h-100 border text-center m-2">
+            <div key={x.id} className="bg-blue-500 p-7 pb-60 border text-center m-2">
               <h2 className='font-bold text-xl'>{x.title}</h2>
-              <p>{x.description}</p>
+              <img src={x.photo} />
               {editing === x.id ? (
                 <div className="space-y-4">
                   <input
