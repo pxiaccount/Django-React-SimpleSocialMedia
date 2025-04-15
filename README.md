@@ -2,6 +2,12 @@
 
 Simple Social Media App with Django and React
 
+## Screenshots
+![image](./screenshots/img1.png) <br />
+![image](./screenshots/img2.png) <br />
+![image](./screenshots/img3.png) <br />
+![image](./screenshots/img4.png) <br />
+
 ## Installation
 
 Clone the repository:

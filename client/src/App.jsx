@@ -62,6 +62,11 @@ function App() {
         item.id === id ? response.data : item
       ))
       setEditing(null)
+      setEditForm({
+        title: '',
+        description: '',
+        photo: ''
+      })
     } catch (error) {
       console.error('Error: ', error)
     }
@@ -142,6 +147,7 @@ function App() {
           {data.map((x) => (
             <div key={x.id} className="bg-blue-500 p-7 pb-60 border text-center m-2">
               <h2 className='font-bold text-xl'>{x.title}</h2>
+              <div>{x.description}</div>
               <img src={x.photo} />
               {editing === x.id ? (
                 <div className="space-y-4">
